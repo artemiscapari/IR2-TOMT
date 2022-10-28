@@ -39,6 +39,7 @@ parser.add_argument("--train_eval_size", type=int, required=True)
 parser.add_argument("--eval_steps", type=int, default=None)
 parser.add_argument("--evals_per_epoch", type=int, default=1)
 parser.add_argument("--cross_encoder", type=str, default=None)
+parser.add_argument("--freeze", type=bool, default=False)
 args = parser.parse_args()
 
 print("Training setup: ", vars(args))
@@ -54,7 +55,15 @@ elif 'sentence-transformer' in args.model_name:
     USE_BE = True
     USE_CE = False
     model = SentenceTransformer(args.model_name)
-    
+    if args.freeze:
+        auto_model = model._first_module().auto_model
+
+        for name, param in auto_model.named_parameters():
+            if 'weight' in name:
+                param.requires_grad = False
+
+    # model = SentenceTransformer(args.model_name)
+
 train_data, train_qrels, eval_qrels, test_qrels, corpus, queries = make_data_splits(
     path = 'data/Movies/',
     train_size = args.train_size,

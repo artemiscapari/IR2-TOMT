@@ -40,6 +40,7 @@ The training function in train.py takes the following arguments:
 :param test_size: number of positive samples of the test set
 :param train_eval_size: number of positive samples of the training set to evaluate on
 :param evals_per_epoch: number of times the evaluation is performed per epoch
+:param freeze: if True, weights of pre-trained model are frozen
 """
 ```
 
@@ -49,7 +50,7 @@ Any pre-trained bi-encoder from [sentence-transformers](https://huggingface.co/m
 An example of how to run the bi encoder:
 ```bash
 conda activate tomt2
-python train.py --model_name sentence-transformers/all-MiniLM-L6-v2 --epochs 25 --train_size 1000 --eval_size 1300 --test_size 1300 --train_eval_size 1000 --evals_per_epoch 5 --bm25_topk 100 --loss_fn multi-neg
+python train.py --model_name sentence-transformers/all-MiniLM-L6-v2 --epochs 25 --train_size 1000 --eval_size 1300 --test_size 1300 --train_eval_size 1000 --evals_per_epoch 5 --bm25_topk 100 --loss_fn multi-neg --freeze True
 ```
 
 ## Train Cross-Encoder

@@ -13,6 +13,7 @@ pip install rank_bm25
 Both the bi-encoder as well as the cross-encoder can be fine-tuned by running the "train.py" file.
 
 The training function in train.py takes the following arguments:
+```bash
 """
 :param model_name: name of a pre-trained bi-encoder from https://huggingface.co/models?library=sentence-transformers of a pre-trained cross-encoder from https://huggingface.co/cross-encoder.
 :param loss_fn:  loss function.
@@ -26,6 +27,7 @@ The training function in train.py takes the following arguments:
 :param train_eval_size: number of positive samples of the training set to evaluate on
 :param evals_per_epoch: number of times the evaluation is performed per epoch
 """
+```
 
 ## Train Bi-Encoder
 Any pre-trained bi-encoder from https://huggingface.co/models?library=sentence-transformers can be used to fine-tune our model by passing the name of the SentenceTransformer model as the argument 'model_name'.
